@@ -40,4 +40,4 @@ if __name__ == '__main__':
         result_lst = transfer(han_lst)
         data.loc[i, 'sentence'] = result_lst
     data.rename(columns={'sentence': 'expected'}, inplace=True)
-    data.to_csv(r'submission.csv', index=False)
+    data.to_csv(r'main_tool.csv', index=False)

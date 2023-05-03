@@ -2,6 +2,8 @@ import math
 import csv
 import pandas as pd
 
+# 使用互信息与二元组频率字典改进的最大匹配算法
+
 
 # 计算两个词的互信息
 def mutual_info(bi_freq, word_freq, word1, word2):
@@ -177,13 +179,13 @@ def transfer(raw_sen):
 
 if __name__ == '__main__':
     # 读入分词
-    with open('vo_freq.csv', 'r', encoding='utf-8') as file:
+    with open('getvo_freq.csv', 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         # 跳过CSV文件的第一行
         next(reader)
         word_freq = {rows[0]: rows[1] for rows in reader}
     # 读入人名
-    with open('dict_n.csv', 'r', encoding='utf-8') as file:
+    with open('get_token.csv', 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         # 跳过CSV文件的第一行
         next(reader)
@@ -205,92 +207,4 @@ if __name__ == '__main__':
         result_lst = transfer(bi_lst)
         data.loc[i, 'sentence'] = result_lst
     data.rename(columns={'sentence': 'expected'}, inplace=True)
-    data.to_csv(r'submission_freq.csv', index=False)
-
-
-# 基于互信息和二元组频率的正向最大匹配
-# def forw_cut(text, bi_freq, word_freq):
-#     # 计算总词数
-#     total_num = sum(int(value) for value in word_freq.values())
-#     # 初始化动态规划数组
-#     n = len(text)
-#     dp = [0] * n
-#     spt_words = []
-#     # 动态规划
-#     i = 0
-#     while i < n:
-#         # 从前往后找最长的匹配
-#         max_len = min(MAXLEN, n - i + 1)
-#         max_word = None
-#         for j in range(1, max_len):
-#             word = text[i:i + j]
-#             if word in word_freq:
-#                 # 当前词在词频字典中，作为一个词
-#                 cur_score = int(word_freq[word]) / total_num
-#             elif len(word) == 1:
-#                 # 单字词，直接作为一个词
-#                 cur_score = 1e-8 / total_num
-#             else:
-#                 # 当前词不在词频字典中，使用互信息计算分数
-#                 cur_score = max(mutual_info(bi_freq, word_freq, total_num, text[i:i + k], text[i + k:i + j])
-#                                 for k in range(j - 1)) + 1e-8
-#             # 更新最大分数和最大词
-#             if cur_score > dp[i]:
-#                 dp[i] = cur_score
-#                 max_word = word
-#         # 将当前词加入结果列表
-#         if max_word is not None:
-#             spt_words.append(max_word)
-#             # yield max_word
-#         # 更新下一次搜索的起始位置
-#         if max_word is None:
-#             k = 1
-#         else:
-#             k = len(max_word)
-#         i += k
-#         spt_lst = " ".join(str(i) for i in spt_words)
-#     return spt_lst
-#
-#
-# # 基于互信息和二元组频率的逆向最大匹配
-# def backw_cut(text, bi_freq, word_freq):
-#     # 计算总词数
-#     total_num = sum(int(value) for value in word_freq.values())
-#     # 初始化动态规划数组
-#     n = len(text)
-#     dp = [0] * n
-#     spt_words = []
-#     # 动态规划
-#     i = 0
-#     while i < n:
-#         # 从后往前找最长的匹配
-#         max_len = min(MAXLEN, n - i)
-#         max_word = None
-#         for j in range(max_len, 0, -1):
-#             word = text[i:i + j]
-#             if word in word_freq and len(word) != 1:
-#                 # 当前词在词频字典中，作为一个词
-#                 cur_score = int(word_freq[word]) / total_num
-#             elif len(word) == 1:
-#                 # 单字词，直接作为一个词
-#                 cur_score = 1 / total_num
-#             else:
-#                 # 当前词不在词频字典中，使用互信息计算分数
-#                 cur_score = max(mutual_info(bi_freq, word_freq, total_num, text[i:i + k], text[i + k:i + j])
-#                                 for k in range(j - 1)) + 1e-8
-#             # 更新最大分数和最大词
-#             if cur_score > dp[i]:
-#                 dp[i] = cur_score
-#                 max_word = word
-#         # 将当前词加入结果列表
-#         if max_word is not None:
-#             spt_words.append(max_word)
-#             # yield max_word
-#         # 更新下一次搜索的起始位置
-#         if max_word is None:
-#             k = 1
-#         else:
-#             k = len(max_word)
-#         i += k
-#         spt_lst = " ".join(str(i) for i in spt_words)
-#     return spt_lst
+    data.to_csv(r'main_freq.csv', index=False)

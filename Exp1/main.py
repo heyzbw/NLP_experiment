@@ -1,13 +1,13 @@
 import pandas as pd
 
-
+# 最初实现的最大匹配算法（未使用频数）
 MAXLEN = 14
 vocabulary = set()
 # 自制词库
-with open('vo_all.csv', encoding='utf-8') as vo_a:
+with open('getvo_freq.csv', encoding='utf-8') as vo_a:
     for l in vo_a.readlines():
-        vocabulary.add(l.split()[0])
-with open('dict_n.csv', encoding='utf-8') as vo_n:
+        vocabulary.add(l.split(',')[0])
+with open('get_token.csv', encoding='utf-8') as vo_n:
     for l in vo_n.readlines():
         vocabulary.add(l.split(',')[0])
 
@@ -60,21 +60,7 @@ def compare(forw_lst, backw_lst):
             return backw_lst
         else:
             return forw_lst
-    # forw_get = [(1 if w in vocabulary else 0) for w in forw_lst]
-    # backw_get = [(1 if w in vocabulary else 0) for w in backw_lst]
-    # forw_rate = sum(forw_get)/len(forw_lst)
-    # backw_rate = sum(backw_get)/len(backw_lst)
-    # if forw_rate > backw_rate:
-    #     return forw_lst
-    # elif backw_rate > forw_rate:
-    #     return backw_lst
-    # else:
-    #     forw_single = [(1 if len(w) == 1 else 0) for w in forw_lst]
-    #     backw_single = [(1 if len(w) == 1 else 0) for w in backw_lst]
-    #     if sum(forw_single) < sum(backw_single):
-    #         return forw_lst
-    #     else:
-    #         return backw_lst
+
 
 # 切分结果转换脚本
 def transfer(raw_sen):
@@ -100,4 +86,4 @@ if __name__ == '__main__':
         result_lst = transfer(better_lst)
         data.loc[i, 'sentence'] = result_lst
     data.rename(columns={'sentence': 'expected'}, inplace=True)
-    data.to_csv(r'submission.csv', index=False)
+    data.to_csv(r'main.csv', index=False)
