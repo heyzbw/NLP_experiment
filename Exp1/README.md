@@ -22,4 +22,4 @@
 
 注*：所有不符合规定的实验性质的提交都由本人小号（`TEAM NAME`为`GOLD`）完成
 
-### [打榜最终成绩](https://www.kaggle.com/competitions/csu-ai-inclass-nlp-2023/leaderboard?tab=public) `Public: 94.186` `Private: 94.309`
+#### [打榜最终成绩](https://www.kaggle.com/competitions/csu-ai-inclass-nlp-2023/leaderboard?tab=public) `Public: 94.186` `Private: 94.309`
