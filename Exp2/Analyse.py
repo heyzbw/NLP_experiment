@@ -74,9 +74,8 @@ if __name__ == '__main__':
             if fl == 'N' or fl == 'n':
                 flag = False
         else:
-            maskimg = plt.imread('./mask/facemask.jpg')
-            # mask_china = imread('./mask/china.png')
-            wc = wordcloud.WordCloud(background_color='white', font_path=r'./smiley/SmileySans-Oblique.ttf', mask=maskimg)
+            maskimg = plt.imread('./static/facemask.jpg')
+            wc = wordcloud.WordCloud(background_color='white', font_path=r'./static/SmileySans-Oblique.ttf', mask=maskimg)
             wc.fit_words(new_dict)
             wc.to_file(r'./cloud/' + sub + '.jpg')
             plt.imshow(wc)
