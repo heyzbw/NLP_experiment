@@ -1,0 +1,27 @@
+{
+    "datasetType": "TF",
+    "numRows": 600000,
+    "columns": {
+        "input_ids": {
+	    "type": "int64",
+	    "rank": 1,
+	    "shape": [128]
+	},
+	"input_mask": {
+            "type": "int64",
+            "rank": 1,
+            "shape": [128]
+        },
+	"segment_ids": {
+            "type": "int64",
+            "rank": 1,
+            "shape": [128]
+        },
+	"label_ids": {
+            "type": "int64",
+            "rank": 1,
+            "shape": [128]
+        }
+    }
+}
+
